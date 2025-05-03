@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { toPinyin } from "../common/functions";
+import {NPM_LINK,GITHUB_LINK} from '../common/links'
 
 const tests = [
 	{
@@ -78,13 +79,13 @@ const tests = [
 	<h2>Licence: MIT</h2>
 	<ul>
 		<li>
-			<a href={import.meta.env.ASTRO_NPM} target="_blank">
+			<a href={NPM_LINK} target="_blank">
 				NPM
 			</a>
 		</li>
 
 		<li>
-			<a href={import.meta.env.ASTRO_GITHUB} target="_blank">
+			<a href={GITHUB_LINK} target="_blank">
 				GitHub
 			</a>
 		</li>

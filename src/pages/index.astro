@@ -1,0 +1,230 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { toPinyin } from "../common/functions";
+
+const tests = [
+	{
+		id: "1",
+		input: "test",
+		expect: "test",
+	},
+	{
+		id: "2",
+		input: "chu1 yin1 wei4 lai2",
+		expect: "chū yīn wèi lái",
+	},
+	{
+		id: "3",
+		input: "xun2 yin1 liu2 ge1",
+		expect: "xún yīn liú gē",
+	},
+	{
+		id: "4",
+		input: "han4 yu3 pin1 yin1 fang1 an4",
+		expect: "hàn yǔ pīn yīn fāng àn",
+	},
+	{
+		id: "5",
+		input: "huar1 renr2 shuir3 yuer4",
+		expect: "huār rénr shuǐr yuèr",
+	},
+	{
+		id: "6",
+		input: "b p m f",
+		expect: "b p m f",
+	},
+	{
+		id: "7",
+		input: "an1 vn2 ong3 uen4",
+		expect: "ān ǘn ǒng uèn",
+	},
+	{
+		id: "8",
+		input: "liou2 yuen2",
+		expect: "liú yún",
+		expect2: "lióu yuén",
+	},
+	{
+		id: "9",
+		input: "iou1 uen4",
+		expect: "iōu uèn",
+	},
+	{
+		id: "10",
+		input: "bong1 tv2 pe3 wir4",
+		expect: "bōng tǘ pě wìr",
+	},
+	{
+		id: "11",
+		input: "qi3 lai2 bu2 yuan4 zuo4 nu2 li4 de ren2 men",
+		expect: "qǐ lái bú yuàn zuò nú lì de rén men",
+	},
+	{
+		id: "12",
+		input: "huar1 wei4 shen2 me zhe4 yang4 hong2",
+		expect: "huār wèi shén me zhè yàng hóng",
+	},
+];
+---
+
+<Layout>
+	<h1>Pinyin Tone</h1>
+
+	<div>
+			This is a simple pinyin tone converter. It converts a string to
+			pinyin tone.
+	</div>
+
+	<h2>Licence: MIT</h2>
+
+	<h2>
+		If you want to convert something like "han4 yu3 pin1 yin1" to pinyin
+	</h2>
+
+	<label for="input">Just type below and then press ↵ enter</label>
+	<div>
+		<input id="input" placeholder="Type here" />
+	</div>
+
+	<script>
+		import { toPinyin } from "../common/functions";
+
+		window.onload = () => {
+			const input = document.querySelector("#input") as HTMLInputElement;
+			const code = document.querySelector("#code");
+			const outputV1 = document.querySelector("#output-v1");
+			const outputV2 = document.querySelector("#output-v2");
+
+			input?.addEventListener("change", (e) => {
+				const userInput = `${e.target!.value}`;
+				code!.innerHTML = userInput;
+
+				outputV1!.innerHTML = toPinyin.v1(userInput);
+				outputV2!.innerHTML = toPinyin.v2(userInput);
+			});
+
+			const copyToClipboard = async (text: string) => {
+				await navigator.clipboard.writeText(text);
+			};
+
+			const copyBtn1 = document.querySelector("#copy-1");
+			const copyBtn2 = document.querySelector("#copy-2");
+			copyBtn1?.addEventListener("click", () => {
+				copyToClipboard(outputV1!.innerHTML);
+			});
+			copyBtn2?.addEventListener("click", () => {
+				copyToClipboard(outputV2!.innerHTML);
+			});
+		};
+	</script>
+
+	<div>
+		Your input: <code id="code"></code>
+	</div>
+
+	<div>
+		<h3>toPinyin (v1):</h3>
+		<code id="output-v1"></code>
+		<div>
+			<button id="copy-1">Copy to clipboard</button>
+		</div>
+	</div>
+
+	<div>
+		<h3>toPinyin (v2)</h3>
+		<code id="output-v2"></code>
+		<div>
+			<button id="copy-2">Copy to clipboard</button>
+		</div>
+	</div>
+
+	<h2>Usage</h2>
+
+	<h3>Installation</h3>
+
+	<div>Using npm:</div>
+	<code>npm install pinyin-tone</code>
+
+	<div>Then in your code:</div>
+	<pre>
+import toPinyin from "pinyin-tone"; // v1
+// /* or */
+// import toPinyin from ("pinyin-tone/v2"); // v2
+
+const input = "han4 yu3 pin1 yin1";
+const result = toPinyin(input);
+console.log(result); // "hàn yǔ pīn yīn"
+</pre>
+
+	<h2>the Tests</h2>
+	<div>The tests are:</div>
+	<code>
+		{JSON.stringify(tests)}
+	</code>
+	<h3>toPinyin V1</h3>
+	{
+		tests.map((item) => {
+			return (
+				<div>
+					<div>test id: {item.id}</div>
+					<div>
+						input: <code>{item.input}</code>
+					</div>
+					<div>
+						expect: <code>{item.expect}</code>
+					</div>
+					<div>
+						result: <code>{toPinyin.v1(item.input)}</code>
+					</div>
+					<div>
+						result === expect?
+						{toPinyin.v1(item.input) === item.expect ? "yes" : "NO!"}
+					</div>
+				</div>
+				<hr/>
+			);
+		})
+	}
+
+	<h3>toPinyin V2</h3>
+	{
+		tests.map((item) => {
+			return (
+				<div>
+					<div>test id: {item.id}</div>
+					<div>
+						input: <code>{item.input}</code>
+					</div>
+					<div>
+						expect: <code>{item.expect}</code>
+					</div>
+					<div>
+						result: <code>{toPinyin.v2(item.input)}</code>
+					</div>
+					<div>
+						result === expect?:{" "}
+						{toPinyin.v2(item.input) === item.expect
+							? "yes"
+							: "NO!"}
+					</div>
+					{item.expect2 && (
+						<div>
+							expect2: <code>{item.expect2}</code>
+							<div>
+							result === expect2?:
+							{item.expect2 && (
+								<span>
+									{item.expect2 === toPinyin.v2(item.input)
+										? "yes"
+										: "NO!"}
+								</span>
+							)}
+							</div>
+						</div>
+					)}
+				</div>
+				<hr/>
+			);
+		})
+	}
+</Layout>

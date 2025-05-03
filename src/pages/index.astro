@@ -76,7 +76,19 @@ const tests = [
 	</div>
 
 	<h2>Licence: MIT</h2>
+	<ul>
+		<li>
+			<a href={import.meta.env.ASTRO_NPM} target="_blank">
+				NPM
+			</a>
+		</li>
 
+		<li>
+			<a href={import.meta.env.ASTRO_GITHUB} target="_blank">
+				GitHub
+			</a>
+		</li>
+	</ul>
 	<h2>
 		If you want to convert something like "han4 yu3 pin1 yin1" to pinyin
 	</h2>
@@ -124,7 +136,8 @@ const tests = [
 	</script>
 
 	<div>
-		Your input: <code id="code"></code>
+		<h3>Your input</h3>
+		<code id="code"></code>
 		<div>
 			<button id="copy-input">Copy to clipboard</button>
 		</div>
@@ -219,7 +232,7 @@ console.log(result); // "hàn yǔ pīn yīn"
 						<div>
 							expect2: <code>{item.expect2}</code>
 							<div>
-							result === expect2?:
+							result === expect2?
 							{item.expect2 && (
 								<span>
 									{item.expect2 === toPinyin.v2(item.input)

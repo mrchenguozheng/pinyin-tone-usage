@@ -115,11 +115,19 @@ const tests = [
 			copyBtn2?.addEventListener("click", () => {
 				copyToClipboard(outputV2!.innerHTML);
 			});
+
+			const copyBtnInput = document.querySelector("#copy-input");
+			copyBtnInput?.addEventListener("click", () => {
+				copyToClipboard(input!.value);
+			});
 		};
 	</script>
 
 	<div>
 		Your input: <code id="code"></code>
+		<div>
+			<button id="copy-input">Copy to clipboard</button>
+		</div>
 	</div>
 
 	<div>

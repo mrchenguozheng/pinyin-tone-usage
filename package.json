@@ -9,7 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.7.10",
+    "astro": "^5.12.8",
     "pinyin-tone": "^2.3.3"
   }
 }

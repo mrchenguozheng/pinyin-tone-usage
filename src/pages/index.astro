@@ -107,6 +107,7 @@ const tests = [
 			const code = document.querySelector("#code");
 			const outputV1 = document.querySelector("#output-v1");
 			const outputV2 = document.querySelector("#output-v2");
+			const outputUnspaced = document.querySelector("#output-unspaced");
 
 			input?.addEventListener("change", (e) => {
 				const userInput = `${e.target!.value}`;
@@ -114,6 +115,7 @@ const tests = [
 
 				outputV1!.innerHTML = toPinyin.v1(userInput);
 				outputV2!.innerHTML = toPinyin.v2(userInput);
+				outputUnspaced!.innerHTML = toPinyin.convertUnspacedPinyin(userInput);
 			});
 
 			const copyToClipboard = async (text: string) => {
@@ -122,11 +124,15 @@ const tests = [
 
 			const copyBtn1 = document.querySelector("#copy-1");
 			const copyBtn2 = document.querySelector("#copy-2");
+			const copyBtnUnspaced = document.querySelector("#copy-unspaced");
 			copyBtn1?.addEventListener("click", () => {
 				copyToClipboard(outputV1!.innerHTML);
 			});
 			copyBtn2?.addEventListener("click", () => {
 				copyToClipboard(outputV2!.innerHTML);
+			});
+			copyBtnUnspaced?.addEventListener("click", () => {
+				copyToClipboard(outputUnspaced!.innerHTML);
 			});
 
 			const copyBtnInput = document.querySelector("#copy-input");
@@ -157,6 +163,15 @@ const tests = [
 		<code id="output-v2"></code>
 		<div>
 			<button id="copy-2">Copy to clipboard</button>
+		</div>
+	</div>
+
+	<div>
+		<h3>toUnspacedPinyin (v2)</h3>
+		<code id='output-unspaced'></code>
+		<div>
+			<button id="copy-unspaced">Copy to clipboard</button>
+
 		</div>
 	</div>
 

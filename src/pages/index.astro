@@ -72,8 +72,8 @@ const tests = [
 	<h1>Pinyin Tone</h1>
 
 	<div>
-			This is a simple pinyin tone converter. It converts a string to
-			pinyin tone.
+			This is a practical pinyin tone converter that transforms numeric tone-marked pinyin (like "han4 yu3" or "han4yu3") into
+			standard accented pinyin with proper tone marks (like "hàn yǔ" or "hànyǔ).
 	</div>
 
 	<h2>Licence: MIT</h2>
@@ -203,19 +203,19 @@ console.log(result); // "hàn yǔ pīn yīn"
 		tests.map((item) => {
 			return (
 				<div>
-					<div>test id: {item.id}</div>
+					<div>Test id: {item.id}</div>
 					<div>
-						input: <code>{item.input}</code>
+						Input: <code>{item.input}</code>
 					</div>
 					<div>
-						expect: <code>{item.expect}</code>
+						Expect: <code>{item.expect}</code>
 					</div>
 					<div>
-						result: <code>{toPinyin.v1(item.input)}</code>
+						Output: <code>{toPinyin.v1(item.input)}</code>
 					</div>
 					<div>
-						result === expect?
-						{toPinyin.v1(item.input) === item.expect ? "yes" : "NO!"}
+						Output === Expect?
+						{toPinyin.v1(item.input) === item.expect ? "Yes" : "NO!"}
 					</div>
 				</div>
 				<hr/>
@@ -228,31 +228,31 @@ console.log(result); // "hàn yǔ pīn yīn"
 		tests.map((item) => {
 			return (
 				<div>
-					<div>test id: {item.id}</div>
+					<div>Test id: {item.id}</div>
 					<div>
-						input: <code>{item.input}</code>
+						Input: <code>{item.input}</code>
 					</div>
 					<div>
-						expect: <code>{item.expect}</code>
+						Expect: <code>{item.expect}</code>
 					</div>
 					<div>
-						result: <code>{toPinyin.v2(item.input)}</code>
+						Output: <code>{toPinyin.v2(item.input)}</code>
 					</div>
 					<div>
-						result === expect?:{" "}
+						Output === Expect?:{" "}
 						{toPinyin.v2(item.input) === item.expect
-							? "yes"
-							: "NO!"}
+							? "Yes"
+							: "-- NO! --"}
 					</div>
 					{item.expect2 && (
 						<div>
-							expect2: <code>{item.expect2}</code>
+							Expect2: <code>{item.expect2}</code>
 							<div>
-							result === expect2?
+							Output === Expect2?
 							{item.expect2 && (
 								<span>
 									{item.expect2 === toPinyin.v2(item.input)
-										? "yes"
+										? "Yes"
 										: "NO!"}
 								</span>
 							)}

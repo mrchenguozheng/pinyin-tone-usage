@@ -1,22 +1,209 @@
+---
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = "Pinyin Tone — numeric pinyin to tone marks",
+	description = "Convert numeric pinyin such as han4 yu3 to tone-marked pinyin (hàn yǔ). Live demo of pinyin-tone v1, v2 and v3.",
+} = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="description" content={description} />
+		<title>{title}</title>
 	</head>
 	<body>
-		<slot />
+		<main>
+			<slot />
+		</main>
 	</body>
 </html>
 
 <style>
+	:root {
+		--bg: #ffffff;
+		--fg: #1c1c1e;
+		--muted: #5c5c66;
+		--line: #d9d9e0;
+		--panel: #f6f6f8;
+		--accent: #1a5fb4;
+		--ok: #1a7f37;
+		--bad: #b42318;
+		color-scheme: light dark;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--bg: #16171a;
+			--fg: #e8e8ea;
+			--muted: #9a9aa4;
+			--line: #33343a;
+			--panel: #1f2024;
+			--accent: #7aa7e8;
+			--ok: #5fd07f;
+			--bad: #ff8a80;
+		}
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
 	html,
 	body {
 		margin: 0;
 		width: 100%;
-		height: 100%;
+		min-height: 100%;
+	}
+
+	body {
+		background: var(--bg);
+		color: var(--fg);
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans",
+			"Microsoft YaHei", sans-serif;
+		line-height: 1.6;
+		font-size: 16px;
+	}
+
+	main {
+		max-width: 860px;
+		margin: 0 auto;
+		padding: 3rem 1.25rem 5rem;
+	}
+
+	h1 {
+		font-size: 1.9rem;
+		line-height: 1.25;
+		margin: 0 0 0.5rem;
+		letter-spacing: -0.01em;
+	}
+
+	h2 {
+		font-size: 1.2rem;
+		margin: 2.5rem 0 0.75rem;
+		padding-bottom: 0.4rem;
+		border-bottom: 1px solid var(--line);
+	}
+
+	h3 {
+		font-size: 1rem;
+		margin: 1.75rem 0 0.5rem;
+	}
+
+	p {
+		margin: 0.6rem 0;
+	}
+
+	a {
+		color: var(--accent);
+	}
+
+	code {
+		font-family: ui-monospace, SFMono-Regular, "Cascadia Code", Consolas,
+			monospace;
+		font-size: 0.9em;
+		background: var(--panel);
+		border: 1px solid var(--line);
+		border-radius: 4px;
+		padding: 0.1em 0.35em;
+	}
+
+	pre {
+		background: var(--panel);
+		border: 1px solid var(--line);
+		border-radius: 8px;
+		padding: 0.9rem 1rem;
+		overflow-x: auto;
+		line-height: 1.5;
+	}
+
+	pre code {
+		background: none;
+		border: 0;
+		padding: 0;
+		font-size: 0.86rem;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.9rem;
+		margin: 0.8rem 0;
+	}
+
+	th,
+	td {
+		text-align: left;
+		padding: 0.45rem 0.6rem;
+		border-bottom: 1px solid var(--line);
+		vertical-align: top;
+	}
+
+	th {
+		font-weight: 600;
+		color: var(--muted);
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+
+	td code {
+		white-space: nowrap;
+	}
+
+	input[type="text"] {
+		width: 100%;
+		font: inherit;
+		color: inherit;
+		background: var(--bg);
+		border: 1px solid var(--line);
+		border-radius: 8px;
+		padding: 0.6rem 0.75rem;
+	}
+
+	input[type="text"]:focus {
+		outline: 2px solid var(--accent);
+		outline-offset: 1px;
+	}
+
+	button {
+		font: inherit;
+		font-size: 0.85rem;
+		color: var(--fg);
+		background: var(--panel);
+		border: 1px solid var(--line);
+		border-radius: 6px;
+		padding: 0.25rem 0.7rem;
+		cursor: pointer;
+	}
+
+	button:hover {
+		border-color: var(--accent);
+	}
+
+	hr {
+		border: 0;
+		border-top: 1px solid var(--line);
+		margin: 1.5rem 0;
+	}
+
+	.muted {
+		color: var(--muted);
+	}
+
+	.ok {
+		color: var(--ok);
+	}
+
+	.bad {
+		color: var(--bad);
 	}
 </style>
